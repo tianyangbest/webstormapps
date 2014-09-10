@@ -1,0 +1,99 @@
+/**
+ * Created by tianyang1 on 2014/9/1.
+ */
+    <script language="javascript">
+    function ShowHide(){
+        var repID = getRepID();
+        var el = document.getElementById("jdaba_prompt_block");
+        var dt = new Date();
+        dt.setTime( dt.getTime() + 1000*60*2 );
+        if ( el.style.display != 'none' ) {
+//alert('display='+el.style.display);
+        el.style.display = 'none';
+        } else { el.style.display = 'block'; }
+        document.cookie = repID+"="+el.style.display+";expires=" + dt.toGMTString();
+        }
+
+    if (window.onload) window.onload = new function callReload() { Reload();}
+    if (window.onresize) window.onresize = new function callResize() { Resize(); }
+
+    if ( window.addEventListener ) {
+        window.addEventListener( "load", Reload, false );
+        window.addEventListener( "resize", Resize, false );
+
+        }
+    if ( window.attachEvent ) {
+        window.attachEvent( "onload", Reload);
+        window.attachEvent( "onresize", Resize);
+        }
+
+    window.onload = Reload;
+    window.onresize = Resize;
+
+    function Resize()
+{
+    var mpanel = document.getElementById("jdaba_scrollpanel");
+    mpanel.style.width = document.body.scrollWidth-55;
+    mpanel.style.height = document.body.scrollHeight-154;
+
+    var ppanel = document.getElementById("jdaba_prompt_block");
+    ppanel.style.width = document.body.scrollWidth-55;
+    }
+
+    function Reload()
+{
+    var repID = getRepID();
+    var empty = "";
+    var mc = getCookie(empty);
+    var di = getCookie(repID);
+    var temp = "block";
+    if (di != mc)
+    {
+    if (di != temp)
+    {
+    ShowHide();
+    }
+    } else
+    {
+    var dt = new Date();
+    dt.setTime( dt.getTime() + 1000*60*2 );
+    document.cookie = repID+"=block;expires=" + dt.toGMTString();
+    };
+
+    Resize();
+    }
+
+    function getCookie(c_name)
+{
+    var i,x,y,ARRcookies=document.cookie.split(";");
+    for (i=0;i<ARRcookies.length;i++)
+    {
+    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+    x=x.replace(/^\s+|\s+$/g,"");
+    if (x==c_name)
+    {
+    return unescape(y);
+    }
+    }
+    }
+
+    function getRepID()
+{
+    var repID = "";
+    var allElements = document.getElementsByTagName('span');
+    for (var i = 0; i < allElements.length; i++)
+    {
+    if (allElements[i].getAttribute('LID'))
+    {
+    repID = allElements[i].getAttribute('LID').substring(1,11);
+    if (repID = 'JDAReportID')
+    return allElements[i].innerHTML;
+    }
+    }
+    return repID;
+    }
+
+
+    </script>
+    <a href="JavaScript:ShowHide()"><font color=gray size="1">Show/Hide Filters</font></a>

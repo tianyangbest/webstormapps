@@ -1,0 +1,7 @@
+{
+    "name": "restifyapp",
+    "version": "0.0.1",
+    "dependencies": {
+        "restify": "~*"
+    }
+}

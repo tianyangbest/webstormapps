@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1></h1>
+
+<p>Welcome to</p>
+
+<div>
+    <% photos.forEach(function(photo) { %>
+    <div>
+        <h2><%= photo.name %></h2>
+        <img src='<%= photo.path %>'>
+    </div>
+    <% }) %>
+</div>
+</body>
+</html>
